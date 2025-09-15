@@ -62,3 +62,23 @@ ENV/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Virtual Environment
+venv_fraud/
+venv_new/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.class
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log

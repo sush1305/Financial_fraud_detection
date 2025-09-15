@@ -24,8 +24,8 @@ from dash.dash_table.Format import Format, Group, Scheme, Sign, Symbol
 from dash.dash_table import FormatTemplate
 
 # Import our custom components
-from components.websocket_client import WebSocketClient, create_mock_websocket_server
-from components.data_processor import DataProcessor, preprocess_realtime_data
+from .components.websocket_client import WebSocketClient, create_mock_websocket_server
+from .components.data_processor import DataProcessor, preprocess_realtime_data
 
 # Configure logging
 logging.basicConfig(
@@ -1457,7 +1457,6 @@ def update_transactions_table(data):
         # Tooltips
         tooltip_data=[],
         tooltip_delay=0,
-        tooltip_duration=None,
         # Export options
         export_format='csv',
         export_headers='display',
@@ -1491,7 +1490,6 @@ def update_transactions_table(data):
         # Page size options
         page_size_options=[10, 25, 50, 100],
         # Disable tooltips for now (can be enabled with custom tooltip_data)
-        tooltip_delay=0,
         tooltip_duration=None
     )
     
