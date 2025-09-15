@@ -1,0 +1,26 @@
+{
+  "trainaccuracy": 1.0,
+  "trainprecision": 1.0,
+  "trainrecall": 1.0,
+  "trainf1": 1.0,
+  "trainconfusion_matrix": {
+    "true_negatives": 788,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "true_positives": 788
+  },
+  "trainauc_roc": 1.0,
+  "trainaverage_precision": 1.0,
+  "testaccuracy": 0.95,
+  "testprecision": 0.0,
+  "testrecall": 0.0,
+  "testf1": 0.0,
+  "testconfusion_matrix": {
+    "true_negatives": 190,
+    "false_positives": 7,
+    "false_negatives": 3,
+    "true_positives": 0
+  },
+  "testauc_roc": 0.6209813874788493,
+  "testaverage_precision": 0.030271167681239625
+}

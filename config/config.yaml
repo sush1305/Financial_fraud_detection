@@ -1,0 +1,232 @@
+# Data Configuration
+data:
+  # Input/Output paths
+  raw_data_path: "data/raw/creditcard.csv"
+  processed_dir: "data/processed"
+  processed_path: "data/processed/processed_data.parquet"
+  model_dir: "models"
+  
+  # Data splitting
+  test_size: 0.2
+  random_state: 42
+  target_column: "Class"
+  
+  # Data versioning
+  version: "1.0.0"
+  
+# Feature Engineering
+features:
+  # Feature selection
+  numeric_features:
+    - "Amount"
+    - "Time"
+    - "V1"
+    - "V2"
+    - "V3"
+    - "V4"
+    - "V5"
+    - "V6"
+    - "V7"
+    - "V8"
+    - "V9"
+    - "V10"
+    - "V11"
+    - "V12"
+    - "V13"
+    - "V14"
+    - "V15"
+    - "V16"
+    - "V17"
+    - "V18"
+    - "V19"
+    - "V20"
+    - "V21"
+    - "V22"
+    - "V23"
+    - "V24"
+    - "V25"
+    - "V26"
+    - "V27"
+    - "V28"
+    
+  # Time-based features
+  time_features:
+    - "hour_of_day"
+    - "day_of_week"
+    - "is_weekend"
+    
+  # Transaction features
+  transaction_features:
+    - "amount_log"
+    - "amount_per_time"
+    - "transaction_frequency"
+    
+  # Feature scaling (standard, minmax, robust)
+  scaling: "standard"
+  
+  # Handle class imbalance (smote, adasyn, random_undersampler, none)
+  handle_imbalance: true
+  sampling_strategy: "smote"
+  
+  # Feature selection
+  feature_selection: true
+  n_features: 20
+  
+# Model Configuration
+model:
+  name: "fraud_detection"
+  
+  # Available models: xgboost, random_forest, logistic_regression, isolation_forest
+  type: "xgboost"
+  
+  # Common parameters
+  random_state: 42
+  n_jobs: -1
+  
+  # XGBoost parameters
+  xgboost_params:
+    n_estimators: 200
+    max_depth: 8
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    scale_pos_weight: 19
+    objective: "binary:logistic"
+    eval_metric: "aucpr"
+    tree_method: "hist"
+    reg_alpha: 0.1
+    reg_lambda: 1.0
+    
+  # Random Forest parameters
+  random_forest_params:
+    n_estimators: 200
+    max_depth: 12
+    min_samples_split: 5
+    min_samples_leaf: 2
+    class_weight: "balanced_subsample"
+    max_samples: 0.8
+    
+  # Logistic Regression parameters
+  logistic_regression_params:
+    C: 0.1
+    penalty: "l2"
+    solver: "saga"
+    max_iter: 1000
+    class_weight: "balanced"
+    
+  # Isolation Forest parameters
+  isolation_forest_params:
+    n_estimators: 200
+    max_samples: 256
+    contamination: "auto"
+    
+# Training Configuration
+training:
+  # Cross-validation settings
+  cv_folds: 5
+  cv_strategy: "stratifiedkfold"
+  scoring: "average_precision"
+  
+  # Early stopping
+  early_stopping_rounds: 20
+  
+  # Model calibration
+  calibrate: true
+  calibration_method: "sigmoid"
+  
+  # Hyperparameter tuning
+  tune_hyperparameters: true
+  n_trials: 50
+  
+  # Batch size for training
+  batch_size: 1024
+  
+# Evaluation Configuration
+evaluation:
+  # Classification threshold
+  threshold: 0.5
+  
+  # Metrics to calculate
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1"
+    - "roc_auc"
+    - "average_precision"
+    - "confusion_matrix"
+    - "classification_report"
+    - "precision_recall_curve"
+    - "roc_curve"
+  
+  # Cross-validation
+  cv_folds: 5
+  
+  # Model interpretation
+  feature_importance: true
+  shap_analysis: true
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/training.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+  
+# API Configuration (for model serving)
+api:
+  enabled: true
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
+  workers: 4
+  log_level: "info"
+  
+# Monitoring Configuration
+monitoring:
+  # Enable/disable monitoring
+  enabled: true
+  
+  # Model performance monitoring
+  performance_monitoring: true
+  performance_window: 1000
+  
+  # Data drift detection
+  drift_detection: true
+  drift_threshold: 0.1
+  drift_window: 1000
+  
+  # Model metrics endpoint
+  metrics_endpoint: "/metrics"
+  
+# Model Registry
+model_registry:
+  # Where to store model versions
+  uri: "models:/"
+  
+  # Model stage (None, Staging, Production, Archived)
+  stage: "None"
+  
+  # Model description
+  description: "Fraud Detection Model"
+  
+# Environment Configuration
+environment:
+  # Development, Staging, Production
+  env: "development"
+  
+  # Enable/disable debug mode
+  debug: true
+  
+  # Enable/disable profiling
+  profile: false
+  
+  # Memory management
+  memory_limit: "4G"
+  
+# Version Information
+version:
+  model: "1.0.0"
+  config: "1.0.0"
+  last_updated: "2025-02-15"
